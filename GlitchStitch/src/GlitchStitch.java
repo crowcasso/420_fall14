@@ -1,8 +1,13 @@
+/**
+ * Stitch multiple Glitch playr sprite sheets into one.
+ * 
+ * @author J. Hollingsworth and G. Roth
+ */
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 
@@ -18,13 +23,17 @@ public class GlitchStitch {
 		Graphics g = result.getGraphics();
 
 		// BASE
-		BufferedImage bi = ImageIO.read(new File("glitch_base.png"));
-		g.drawImage(bi, 0, 5, null);
-
+		int width = 96;
+		int height = 130;
+		BufferedImage bi = ImageIO.read(new File("demon_base.png"));
+		for( int x = 0; x < 15; x++){
+		g.drawImage(bi.getSubimage(x * width, 0, width, height), x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 0 +(FRAME_HEIGHT - height)  , null);
+		}
+		
 		// CLIMB
-		int width = 80;
-		int height = 117;
-		bi = ImageIO.read(new File("glitch_climb.png"));
+		width = 94;
+		height = 127;
+		bi = ImageIO.read(new File("demon_climb.png"));
 		for (int x = 0; x < 19; x++) {
 			g.drawImage(bi.getSubimage(x * width, 0, width, height), 
 					x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 
@@ -33,9 +42,9 @@ public class GlitchStitch {
 		}
 
 		// JUMP
-		width = 150;
-		height = 160;
-		bi = ImageIO.read(new File("glitch_jumping.png"));
+		width = 128;
+		height = 132;
+		bi = ImageIO.read(new File("demon_jump.png"));
 		for (int x = 0; x < 33; x++) {
 			BufferedImage sub = bi.getSubimage(x * width, 0, width, height);
 			if (x < 21) {
@@ -52,9 +61,9 @@ public class GlitchStitch {
 		}
 
 		// SLEEP
-		width = 90;
-		height = 125;
-		bi = ImageIO.read(new File("glitch_sleepy.png"));
+		width = 110;
+		height = 128;
+		bi = ImageIO.read(new File("demon_sleep.png"));
 		for (int y = 0; y < 2; y++) {
 			for (int x = 0; x < 21; x++) {
 				g.drawImage(bi.getSubimage(x * width, y * height, width, height), 
