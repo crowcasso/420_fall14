@@ -12,68 +12,68 @@ import javax.imageio.ImageIO;
 
 
 public class GlitchStitch {
-
-	private static final int FRAME_WIDTH = 192;
-	private static final int FRAME_HEIGHT = 160;
+	
+	private static final String[] FILE_NAMES = {"demon_base.png", 
+		"demon_climb.png", "demon_jump.png", "demon_sleep.png"};
+	private static final int[] FRAMES_WIDE = {15, 19, 33, 21};
+	private static final int[] FRAMES_TALL = {1, 1, 1, 2};
 
 	public static void main(String[] args) throws IOException {
+			
+		// how big is a frame?
+		int frameWidth = 0;
+		int frameHeight = 0;
+		BufferedImage image[] = new BufferedImage[FILE_NAMES.length];
+		for (int i = 0; i < FILE_NAMES.length; i++) {
+			image[i] = ImageIO.read(new File(FILE_NAMES[i]));
+			if (frameWidth < (image[i].getWidth() / FRAMES_WIDE[i]))
+				frameWidth = image[i].getWidth() / FRAMES_WIDE[i];
+			if (frameHeight < (image[i].getHeight() / FRAMES_TALL[i])) 
+				frameHeight = image[i].getHeight() / FRAMES_TALL[i];
+		}	
+		System.out.println("frame size = (" + frameWidth + ", " + frameHeight + ")");
+		
+		// how big is the final sprite sheet?
+		int fullWidth = (4096 / frameWidth) * frameWidth;
+		int fullHeight = 0;
+		for (int i = 0; i < FILE_NAMES.length; i++) {
+			fullHeight += frameHeight * (Math.ceil((FRAMES_WIDE[i] * FRAMES_TALL[i] * frameWidth) / fullWidth) + 1);
+		}
+		
+		System.out.println("Creating new file of size ("+ fullWidth + ", " + fullHeight + ")");
+		
 		BufferedImage result = new BufferedImage(
-				4032, 960,
+				fullWidth, fullHeight,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics g = result.getGraphics();
 
-		// BASE
-		int width = 96;
-		int height = 130;
-		BufferedImage bi = ImageIO.read(new File("demon_base.png"));
-		for( int x = 0; x < 15; x++){
-		g.drawImage(bi.getSubimage(x * width, 0, width, height), x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 0 +(FRAME_HEIGHT - height)  , null);
-		}
-		
-		// CLIMB
-		width = 94;
-		height = 127;
-		bi = ImageIO.read(new File("demon_climb.png"));
-		for (int x = 0; x < 19; x++) {
-			g.drawImage(bi.getSubimage(x * width, 0, width, height), 
-					x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 
-					FRAME_HEIGHT+(FRAME_HEIGHT - height), 
-					null);
-		}
-
-		// JUMP
-		width = 128;
-		height = 132;
-		bi = ImageIO.read(new File("demon_jump.png"));
-		for (int x = 0; x < 33; x++) {
-			BufferedImage sub = bi.getSubimage(x * width, 0, width, height);
-			if (x < 21) {
-				g.drawImage(sub, 
-						x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 
-						(FRAME_HEIGHT*2)+(FRAME_HEIGHT - height), 
-						null);
-			} else {
-				g.drawImage(sub, 
-						(x - 21)*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 
-						(FRAME_HEIGHT*3)+(FRAME_HEIGHT - height), 
-						null);
+		int row = 0;
+		int col = 0;
+		for (int i = 0; i < FILE_NAMES.length; i++) {
+			int width = image[i].getWidth() / FRAMES_WIDE[i];
+			int height = image[i].getHeight() / FRAMES_TALL[i];
+			System.out.print(FILE_NAMES[i] + ": (" + row + ", " + col + ") ==> ");
+			for (int y = 0; y < FRAMES_TALL[i]; y++) {
+				for (int x = 0; x < FRAMES_WIDE[i]; x++) {
+					
+					if (col >= fullWidth/frameWidth) {
+						row++;
+						col = 0;
+					}
+					
+					g.drawImage(image[i].getSubimage(x * width, y * height, width, height),
+							(col * frameWidth) + (frameWidth - width)/2,
+							(row * frameHeight) + (frameHeight - height)/2,
+							null);
+					
+					col++;					
+				}
 			}
-		}
-
-		// SLEEP
-		width = 110;
-		height = 128;
-		bi = ImageIO.read(new File("demon_sleep.png"));
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 21; x++) {
-				g.drawImage(bi.getSubimage(x * width, y * height, width, height), 
-						x*FRAME_WIDTH+(FRAME_WIDTH - width)/2, 
-						FRAME_HEIGHT*(y+4)+(FRAME_HEIGHT - height), 
-						null);
-			}
+			System.out.println("(" + row + ", " + (col - 1) + ")");
+			row++;
+			col = 0;
 		}
 
 		ImageIO.write(result, "png", new File("result.png"));
 	}
-
 }
