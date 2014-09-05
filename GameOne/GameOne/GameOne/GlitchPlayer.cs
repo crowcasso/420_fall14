@@ -56,6 +56,7 @@ namespace GameOne
 
         private void switchState(GlitchPlayerState newState)
         {
+            pauseAnimation = false;
             currentState = newState;
             spriteSheet.setCurrentSegment((Int32)newState);
             currentFrame = spriteSheet.currentSegment.startFrame;
@@ -129,9 +130,6 @@ namespace GameOne
             {
                 if (fallingToSleep)
                 {
-                    player.spriteSheet.setCurrentSegment((Int32)GlitchPlayerState.Sleeping);
-
-                    player.pauseAnimation = false;
                     sleepingPosition = player.position;
                     fallingToSleep = false;
                 }
