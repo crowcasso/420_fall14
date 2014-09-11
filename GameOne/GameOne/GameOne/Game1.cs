@@ -25,6 +25,11 @@ namespace GameOne
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // resize the game
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferWidth = 1024;
         }
 
         /// <summary>

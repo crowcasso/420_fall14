@@ -18,6 +18,7 @@ namespace GameOne
     public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
         SpriteBatch spriteBatch;
+        Sprite player;
         List<Sprite> spriteList = new List<Sprite>();
 
         public SpriteManager(Game game)
@@ -41,7 +42,8 @@ namespace GameOne
         {
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
-            spriteList.Add(new GlitchPlayer(Game.Content.Load<Texture2D>(@"Images/LadyZ")));
+            player = new GlitchPlayer(Game.Content.Load<Texture2D>(@"Images/LadyZ"));
+            spriteList.Add(new Chicken(Game.Content.Load<Texture2D>(@"Images/chicken_walk")));
 
             base.LoadContent();
         }
@@ -52,8 +54,19 @@ namespace GameOne
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            player.Update(gameTime, Game.Window.ClientBounds);
+            
+            // update each automated sprite
             foreach (Sprite sprite in spriteList)
                 sprite.Update(gameTime, Game.Window.ClientBounds);
+            
+            // collision
+            foreach (Sprite sprite in spriteList)
+                if (sprite.collisionRect.Intersects(player.collisionRect))
+                {
+                    player.Collision(sprite);
+                    sprite.Collision(player);
+                }
 
             base.Update(gameTime);
         }
@@ -61,6 +74,7 @@ namespace GameOne
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+            player.Draw(gameTime, spriteBatch);
             foreach (Sprite sprite in spriteList)
                 sprite.Draw(gameTime, spriteBatch);
             spriteBatch.End();

@@ -107,6 +107,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomatedSprite.cs" />
+    <Compile Include="Chicken.cs" />
+    <Compile Include="CollisionOffset.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GlitchPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
