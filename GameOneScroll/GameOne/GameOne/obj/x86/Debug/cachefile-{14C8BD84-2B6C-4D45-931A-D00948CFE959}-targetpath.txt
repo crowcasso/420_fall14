@@ -1,7 +1,0 @@
-Content\Images\LadyZ.xnb
-Content\Images\chicken_walk.xnb
-<<<<<<< HEAD
-Content\Images\grade_aa_earth_block.xnb
-Content\Images\background.xnb
-=======
->>>>>>> parent of 6fa03c9... ... now with sound!
