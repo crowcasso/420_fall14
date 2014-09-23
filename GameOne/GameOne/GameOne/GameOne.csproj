@@ -112,6 +112,7 @@
     <Compile Include="CollisionOffset.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GlitchPlayer.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Sprite.cs" />

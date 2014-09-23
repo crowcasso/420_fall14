@@ -42,8 +42,10 @@ namespace GameOne
         {
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
-            player = new GlitchPlayer(Game.Content.Load<Texture2D>(@"Images/LadyZ"));
+            player = new GlitchPlayer(Game, Game.Content.Load<Texture2D>(@"Images/LadyZ"));
             spriteList.Add(new Chicken(Game.Content.Load<Texture2D>(@"Images/chicken_walk")));
+            spriteList.Add(new Platform(new SpriteSheet(Game.Content.Load<Texture2D>(@"Images/grade_aa_earth_block"), 
+                new Point(1, 0), 1.0f), new Vector2(100, 630), new CollisionOffset(25, 0, 20, 20)));
 
             base.LoadContent();
         }

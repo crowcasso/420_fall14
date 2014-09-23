@@ -33,13 +33,18 @@ namespace GameOne
         static Vector2 glitchSpeed = new Vector2(64, 32);
         static Vector2 glitchFriction = new Vector2(0.8f, 1f);
         static Point glitchFrameSize = new Point(192, 160);
+        static float glitchScale = .5f;
+
+        Game game;
 
         // constructor
-        public GlitchPlayer(Texture2D image)
-             : base(new SpriteSheet(image, glitchNumberOfFrames, .5f), 
+        public GlitchPlayer(Game game, Texture2D image)
+             : base(new SpriteSheet(image, glitchNumberOfFrames, glitchScale), 
             Vector2.Zero, glitchCollisionOffset, glitchSpeed, glitchFriction)
             
         {
+            this.game = game;
+
             // set the segments and frame size
             spriteSheet.addSegment(glitchFrameSize, new Point(0, 0), new Point(11,0), 20);
             spriteSheet.addSegment(glitchFrameSize, new Point(0, 1), new Point(18, 1), 50);
@@ -62,6 +67,9 @@ namespace GameOne
          */
         public override void Update(GameTime gameTime, Rectangle clientBounds)
         {
+
+            //System.Console.WriteLine("CurrentState: " + currentState);
+
             // call Update for the current state
             states[(Int32)currentState].Update(gameTime, clientBounds);
 
@@ -74,6 +82,36 @@ namespace GameOne
          */
         public override void Collision(Sprite otherSprite)
         {
+            if (otherSprite.isImpassable)
+            {
+                if (collisionRect.Right >= otherSprite.collisionRect.Left && collisionRect.Left < otherSprite.collisionRect.Left) // collide from the east
+                {
+                    System.Console.WriteLine("from the east!");
+                    position.X = otherSprite.collisionRect.Left - (glitchCollisionOffset.east * glitchScale + collisionRect.Width);
+                    position.X = (float)Math.Ceiling(position.X);
+                    velocity.X = 0;
+                } 
+                else if (collisionRect.Left <= otherSprite.collisionRect.Right && collisionRect.Right > otherSprite.collisionRect.Right) // collide from the west
+                {
+                    System.Console.WriteLine("from the west!");
+                    position.X = otherSprite.collisionRect.Right - (glitchCollisionOffset.east * glitchScale);
+                    position.X = (float)Math.Ceiling(position.X);
+                    velocity.X = 0;
+                }
+                else if (collisionRect.Top <= otherSprite.collisionRect.Bottom && collisionRect.Bottom >= otherSprite.collisionRect.Bottom)
+                {
+                    // do nothing
+                }
+                else if (collisionRect.Bottom >= otherSprite.collisionRect.Top && collisionRect.Top < otherSprite.collisionRect.Top)
+                {
+                    System.Console.WriteLine("from the north!");
+                    position.Y = otherSprite.collisionRect.Top - (glitchCollisionOffset.south + glitchCollisionOffset.north * glitchScale + collisionRect.Height);
+                    position.Y = (float)Math.Ceiling(position.Y);
+                    velocity.Y = 0;
+                    onGround = true;
+                }
+            }
+
             if (currentState == GlitchPlayerState.Sleeping)
                 switchState(GlitchPlayerState.Walking);
         }
@@ -140,7 +178,9 @@ namespace GameOne
                 {
                     if (player.onGround)
                     {
+                        //((Game1)player.game).PlayCue("triple_jump");
                         timeSinceLastMove = 0;
+                        player.onGround = false;
                         player.switchState(GlitchPlayerState.Jumping);
                         player.velocity.Y += -400f;
                     }
@@ -148,11 +188,14 @@ namespace GameOne
            
                 // transition to sleep state?
                 timeSinceLastMove += gameTime.ElapsedGameTime.Milliseconds;
-                if (timeSinceLastMove > timeForSleep)
+                if (timeSinceLastMove > timeForSleep && player.onGround)
                 {
                     timeSinceLastMove = 0;
                     player.switchState(GlitchPlayerState.Sleeping);
                 }
+
+                if (player.onGround == false)
+                    timeSinceLastMove = 0;
             }
         }
 

@@ -91,10 +91,7 @@ namespace GameOne
                 onGround = true;
                 position.Y = clientBounds.Height - spriteSheet.scale * (spriteSheet.currentSegment.frameSize.Y - collisionOffset.south);
             }
-            else
-            {
-                onGround = false;
-            }
+            
 
             base.Update(gameTime, clientBounds);
         }

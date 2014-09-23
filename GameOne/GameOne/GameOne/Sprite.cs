@@ -14,10 +14,12 @@ namespace GameOne
         protected Boolean pauseAnimation = false;
         protected SpriteEffects effects = SpriteEffects.None;
 
-        protected CollisionOffset collisionOffset;
+        public CollisionOffset collisionOffset;
         
         int timeSinceLastFrame = 0;
-        protected Vector2 position;
+        public Vector2 position;
+
+        public bool isImpassable = false;
 
         public Sprite(SpriteSheet spriteSheet, Vector2 position, CollisionOffset collisionOffset)
         {

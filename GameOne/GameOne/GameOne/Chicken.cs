@@ -11,7 +11,7 @@ namespace GameOne
     {
         public Chicken(Texture2D texture)
             :base(new SpriteSheet(texture, new Point(24, 0), 1.0f), new Vector2(600, 50), 
-            new CollisionOffset(50, 0, 50, 50), new Vector2(-1f, 0))
+            new CollisionOffset(50, 0, 50, 50), new Vector2(32f, 0))
         {
             Point frameSize = new Point(148, 110);
             spriteSheet.addSegment(frameSize, new Point(0, 0), new Point(23, 0), 10);
@@ -26,8 +26,7 @@ namespace GameOne
 
         public override void Collision(Sprite otherSprite)
         {
-            System.Diagnostics.Debug.WriteLine("Chicken Collision");
-            position.X += 20f;
+            position.X += -speed.X;
             speed *= -1;
         }
     }
