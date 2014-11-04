@@ -1,0 +1,7 @@
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\bin\x86\Debug\Content\Models\spaceship.xnb
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\bin\x86\Debug\GameTwo_Beta2.exe
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\bin\x86\Debug\GameTwo_Beta2.pdb
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\obj\x86\Debug\GameTwo_Beta2.exe
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\obj\x86\Debug\GameTwo_Beta2.pdb
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta2\GameTwo_Beta2\GameTwo_Beta2\obj\x86\Debug\GameTwo_Beta2.csprojResolveAssemblyReference.cache

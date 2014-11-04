@@ -1,0 +1,7 @@
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\obj\x86\Debug\GameTwo.csprojResolveAssemblyReference.cache
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\bin\x86\Debug\GameTwo.exe
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\bin\x86\Debug\GameTwo.pdb
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\obj\x86\Debug\GameTwo.exe
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\obj\x86\Debug\GameTwo.pdb
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwo\bin\x86\Debug\Content\Textures\Desert.xnb

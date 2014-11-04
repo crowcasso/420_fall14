@@ -1,0 +1,2 @@
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo\GameTwo\GameTwoContent\obj\x86\Debug\GameTwoContent.contentprojResolveAssemblyReference.cache
+C:\Users\crowcasso\Documents\Visual Studio 2010\Projects\GameTwo_Beta1\GameTwo\GameTwoContent\obj\x86\Debug\GameTwoContent.contentprojResolveAssemblyReference.cache
